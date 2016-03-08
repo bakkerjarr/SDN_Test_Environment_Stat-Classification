@@ -4,10 +4,7 @@ This repository contains programs and scripts for building a small testing envir
 
 ## Test Environment
 
-Oracle VirtualBox is used to run two VMs created using the SDN Hub 
-all-in-one SDN app development starter VM (http://yuba.stanford
-.edu/~srini/tutorial/SDN_tutorial_VM_64bit.ova) (available March 8, 
-2016).
+Oracle VirtualBox is used to run two VMs created using the SDN Hub all-in-one SDN app development starter VM (http://yuba.stanford.edu/~srini/tutorial/SDN_tutorial_VM_64bit.ova) (available March 8, 2016).
 
 The following versions of software were used:
 - Mininet 2.2.1
