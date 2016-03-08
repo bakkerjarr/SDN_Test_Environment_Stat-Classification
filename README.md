@@ -42,21 +42,25 @@ Adapter 2:
 
 5. Within VM1 edit the file /etc/network/interfaces and add the below configuration.
 
-    auto eth1
-    iface eth1 inet static
-        address 192.168.56.101
-        netmask 255.255.255.0
-        network 192.168.56.0
-        broadcast 192.168.56.255
+```
+auto eth1
+iface eth1 inet static
+    address 192.168.56.101
+    netmask 255.255.255.0
+    network 192.168.56.0
+    broadcast 192.168.56.255
+```
 
 6. Within VM2 edit the file /etc/network/interfaces and add the below configuration.
 
-    auto eth1
-    iface eth1 inet static
-        address 192.168.56.102
-        netmask 255.255.255.0
-        network 192.168.56.0
-        broadcast 192.168.56.255
+```
+auto eth1
+iface eth1 inet static
+    address 192.168.56.102
+    netmask 255.255.255.0
+    network 192.168.56.0
+    broadcast 192.168.56.255
+```
 
 7. Reboot each VM or bring up the eth1 interface using other means.
 
