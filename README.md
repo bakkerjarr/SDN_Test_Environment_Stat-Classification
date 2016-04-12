@@ -23,17 +23,17 @@ The following versions of software were used:
 
 #### VM1
 - Adapter 2
-..- Attached to:  Internal Network vm1->vm2.
-..- Promiscuous Mode: Allow VMs.
+  - Attached to:  Internal Network vm1->vm2.
+  - Promiscuous Mode: Allow VMs.
 - Adapter 3
-..- Attached to:  Internal Network vm1->vm1.
-..- Promiscuous Mode: Allow VMs.
+  - Attached to:  Internal Network vm1->vm1.
+  - Promiscuous Mode: Allow VMs.
 - Adapter 4
-..- Attached to:  Internal Network vm1->vm1.
+  - Attached to:  Internal Network vm1->vm1.
 
 #### VM2
 - Adapter 2
-..- Attached to:  Internal Network vm1->vm2.
+  - Attached to:  Internal Network vm1->vm2.
 
 ### Step 2. Virtual Machine Network Configuration
 For each VM open and edit /etc/network/interfaces to 
