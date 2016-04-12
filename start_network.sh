@@ -17,4 +17,4 @@ sudo mn -c ;
 # hosts connected to it.
 echo
 echo
-sudo python network/create_simple_topo.py
+sudo python network/create_simple_topo.py eth1 eth2

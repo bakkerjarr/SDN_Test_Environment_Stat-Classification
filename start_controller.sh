@@ -8,4 +8,4 @@
 clear ;
 # The paths below may need to edited, this should be changed!
 cd ;
-cd ryu && ./bin/ryu-manager --verbose /home/ubuntu/PycharmProjects/Test_Env_Topo/controller/test_env_app ;
+cd ryu && ./bin/ryu-manager --verbose /home/ubuntu/PycharmProjects/SDN_Test_Environment_Stat-Classification/controller/test_env_app ;
