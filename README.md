@@ -1,6 +1,10 @@
 # SDN_Test_Environment_Stat-Classification
 
-This repository contains programs and scripts for building a small testing environment involving two virtual machines (VMs) and a Mininet network. This means that Mininet can be used to emulate a network topology on a VM (say VM1) and another VM (say VM2) can externally prcoess data mined from the Mininet network.
+This repository contains programs and scripts for building a small 
+testing environment involving two virtual machines (VMs) and a Mininet
+network. This means that Mininet can be used to emulate a network
+topology on a VM (say VM1) and another VM (say VM2) can externally
+prcoess data mined from the Mininet network.
 
 ## Test Environment
 
@@ -13,45 +17,46 @@ The following versions of software were used:
 - Ryu 3.22
 - Open vSwitch 2.3.90
 
-## Establishing Network Connectivity Between VM1 and VM2
+## Establishing Network Connectivity Between VM1 and VM2 through Mininet
 
-1. Create a host-only network in VirtualBox. Initialise with the below
- settings.
+### Step 1. VirtualBox Network Settings
 
-Adapter:
-- IPv4 Address: 192.168.56.1
-- IPv4 Network Mask: 255.255.255.0
-- IPv6 Address: (leave blank)
-- IPv6 Network Mask Length: 0
-    
-DHCP Server: leave disabled.
+#### VM1
+- Adapter 2
+⋅⋅- Attached to:  Internal Network vm1->vm2.
+⋅⋅- Promiscuous Mode: Allow VMs.
+- Adapter 3
+⋅⋅- Attached to:  Internal Network vm1->vm1.
+⋅⋅- Promiscuous Mode: Allow VMs.
+- Adapter 4
+⋅⋅- Attached to:  Internal Network vm1->vm1.
 
-2. Create two VMs (VM1 and VM2) using the VM image mentioned above.
+#### VM2
+- Adapter 2
+⋅⋅- Attached to:  Internal Network vm1->vm2.
 
-3. For each VM created go to Settings -> Network to configure the network adapters. Ensure that the MAC addresses of all created adapters are different.
+### Step 2. Virtual Machine Network Configuration
+For each VM open and edit /etc/network/interfaces to 
+match the configuration below. Reboot each machine once the changes 
+have been made.
 
-Adapter 1:
-- Attached to: NAT
-    
-Adapter 2:
-- Attached to: Host-only Adapter
-- Name: vboxnet0
-    
-4. Start VM1 and VM2.
-
-5. Within VM1 edit the file /etc/network/interfaces and add the below configuration.
-
+#### VM1
 ```
 auto eth1
-iface eth1 inet static
+iface eth1 inet manual
+
+auto eth2
+iface eth2 inet manual
+
+auto eth3
+iface eth3 inet static
     address 192.168.56.101
     netmask 255.255.255.0
     network 192.168.56.0
     broadcast 192.168.56.255
 ```
 
-6. Within VM2 edit the file /etc/network/interfaces and add the below configuration.
-
+#### VM2
 ```
 auto eth1
 iface eth1 inet static
@@ -61,20 +66,25 @@ iface eth1 inet static
     broadcast 192.168.56.255
 ```
 
-7. Reboot each VM or bring up the eth1 interface using other means.
+### Step 3. Virtual Machine Routing Tables
+Log into each each VM and execute the route command. Ensure that the 
+entries match those in the route tables below.
 
-8. Confirm that eth1 has initialised itself on each VM by using ifconfig.
+#### VM1
 
-9. Execute the route command in each VM, the outputted tables should contain the three entries displayed below.
+| Destination  | Gateway  | Genmask       | Flags | Metric | Ref | Use | Iface |
+|:------------ |:-------- |:------------- |:----- |:------ |:--- | ---:|:----- |
+| default      | 10.0.2.2 | 0.0.0.0       | UG    | 0      | 0   | 0   | eth0  |
+| 10.0.2.0     | *        | 255.255.255.0 | U     | 0      | 0   | 0   | eth0  |
+| 192.168.56.0 | *        | 255.255.255.0 | U     | 0      | 0   | 0   | eth3  |
+
+#### VM2
 
 | Destination  | Gateway  | Genmask       | Flags | Metric | Ref | Use | Iface |
 |:------------ |:-------- |:------------- |:----- |:------ |:--- | ---:|:----- |
 | default      | 10.0.2.2 | 0.0.0.0       | UG    | 0      | 0   | 0   | eth0  |
 | 10.0.2.0     | *        | 255.255.255.0 | U     | 0      | 0   | 0   | eth0  |
 | 192.168.56.0 | *        | 255.255.255.0 | U     | 0      | 0   | 0   | eth1  |
-
-10. Ping VM2 from VM1 and vice versa to verify that each virtual 
-machine can indeed reach one another.
 
 ## Commands for Checking Component Versions
 Check Mininet version:
