@@ -2,7 +2,7 @@
 #title          :start_network.sh
 #description    :Create a network topology in Mininet
 #author         :Jarrod N. Bakker
-#date           :08/03/2016
+#date           :14/04/2016
 #usage          :bash start_network.sh
 #========================================================================
 clear ;
@@ -13,8 +13,8 @@ sudo mn -c ;
 # to OpenFlow 1.3.
 # sudo ovs-vsctl set bridge s1 protocols=OpenFlow13
 
-# Start Mininet with a simple topology of a single OpenFlow switch with 3
-# hosts connected to it.
+# Start Mininet with a simple topology of a single OpenFlow switch with
+# 2 virtual hosts connected to it along with some of the host's NICs.
 echo
 echo
 sudo python network/create_simple_topo.py eth1 eth2
