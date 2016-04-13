@@ -33,6 +33,22 @@ class SimpleTopo(Topo):
             self.addLink(host, switch)
 
 
+def set_qos(switch):
+    """Set the QoS parameters on a switch.
+
+    :param switch: The switch to operate on.
+    """
+    lg.info("***Attempting to set QoS parameters on switch {"
+            "0}. Output shown below.\n".format(switch.name))
+    lg.info(switch.vsctl("clear Port s1-eth2 qos"))
+    lg.info(switch.vsctl("--all destroy qos"))
+    lg.info(switch.vsctl("-- set Port s1-eth2 qos=@newqos -- "
+                         "--id=@newqos create QoS type=linux-htb "
+                         "other-config:max-rate=1000000000 queues=0=@q0,"
+                         "1=@q1 -- --id=@q0 create Queue "
+                         "other-config:max-rate=1000000000 -- --id=@q1 "
+                         "create Queue other-config:max-rate=100000"))
+
 def start_mininet(iface_names):
     """Start Mininet with the above topology.
 
@@ -50,6 +66,7 @@ def start_mininet(iface_names):
         # Connect the switch to the eth1 interface of this host machine!
         Intf(iface, node=switch)
     net.start()
+    set_qos(switch)
     lg.info("***Dumping host connections\n")
     dumpNodeConnections(net.hosts)
     lg.info("***Dumping switch connections\n")
