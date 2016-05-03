@@ -50,20 +50,20 @@ iface eth2 inet manual
 
 auto eth3
 iface eth3 inet static
-    address 192.168.56.101
+    address 192.168.10.101
     netmask 255.255.255.0
-    network 192.168.56.0
-    broadcast 192.168.56.255
+    network 192.168.10.0
+    broadcast 192.168.10.255
 ```
 
 #### VM2
 ```
 auto eth1
 iface eth1 inet static
-    address 192.168.56.102
+    address 192.168.10.102
     netmask 255.255.255.0
-    network 192.168.56.0
-    broadcast 192.168.56.255
+    network 192.168.10.0
+    broadcast 192.168.10.255
 ```
 
 ### Step 3. Virtual Machine Routing Tables
@@ -76,7 +76,7 @@ entries match those in the route tables below.
 |:------------ |:-------- |:------------- |:----- |:------ |:--- | ---:|:----- |
 | default      | 10.0.2.2 | 0.0.0.0       | UG    | 0      | 0   | 0   | eth0  |
 | 10.0.2.0     | *        | 255.255.255.0 | U     | 0      | 0   | 0   | eth0  |
-| 192.168.56.0 | *        | 255.255.255.0 | U     | 0      | 0   | 0   | eth3  |
+| 192.168.10.0 | *        | 255.255.255.0 | U     | 0      | 0   | 0   | eth3  |
 
 #### VM2
 
@@ -84,7 +84,7 @@ entries match those in the route tables below.
 |:------------ |:-------- |:------------- |:----- |:------ |:--- | ---:|:----- |
 | default      | 10.0.2.2 | 0.0.0.0       | UG    | 0      | 0   | 0   | eth0  |
 | 10.0.2.0     | *        | 255.255.255.0 | U     | 0      | 0   | 0   | eth0  |
-| 192.168.56.0 | *        | 255.255.255.0 | U     | 0      | 0   | 0   | eth1  |
+| 192.168.10.0 | *        | 255.255.255.0 | U     | 0      | 0   | 0   | eth1  |
 
 ## Commands for Checking Component Versions
 Check Mininet version:
