@@ -27,7 +27,7 @@ class SimpleTopo(Topo):
         switch_opts = {"inband": False, "protocols": "OpenFlow13"}
         switch = self.addSwitch("s1", opts=switch_opts)
         for i in range(1, k+1):
-            host = self.addHost("h{0}".format(i),ip="192.168.10.1{"
+            host = self.addHost("h{0}".format(i),ip="10.0.0.1{"
                                                     "0}/24".format(i),
                                 mac="00:00:00:00:00:0{0}".format(i))
             self.addLink(host, switch)

@@ -17,4 +17,4 @@ sudo mn -c ;
 # 2 virtual hosts connected to it along with some of the host's NICs.
 echo
 echo
-sudo python network/create_simple_topo.py eth1 eth2
+sudo python network/create_simple_topo.py enp0s9
