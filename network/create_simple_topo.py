@@ -23,7 +23,7 @@ class SimpleTopo(Topo):
     def build(self):
         """Build the topology.
         """
-        k = 2
+        k = 3
         switch_opts = {"inband": False, "protocols": "OpenFlow13"}
         switch = self.addSwitch("s1", opts=switch_opts)
         for i in range(1, k+1):
